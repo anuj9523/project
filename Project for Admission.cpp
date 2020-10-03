@@ -93,12 +93,39 @@ void Student::search()
 void Student :: Delete()
 {
 	int sno;
-	bool state =false;
 	
+	bool rst=false;
 	system("cls");
-	ifstream  fin("student.txt",ios::in);
-	ofstream  fout("temp.txt", ios::out);
+	ifstream fin("student.txt",ios::in);
+    ofstream fout("temp.dat",ios::out);
+	
+	//this=&p
+	cout<<"\nEnter Product number:";
+	cin>>sno; //103
+	
+	//Arrays---search---->c file search----C++ search
+	//C++ file
+	while(fin.read((char*)this,sizeof(*this)))
+	{
+	    if(sno!=pno)
+	    {
+		    fout.write((char*)this,sizeof(*this));
+			rst=true;
+			
+		}
+		
+		}
+		
+	if(rst==false)
+		cout<<"No Record found";
+		
+	
+    fin.close();
+	fout.close();
+	remove("student.txt");
+	rename("temp.dat","student.txt");
 }
+
 	
 int main()
 {
